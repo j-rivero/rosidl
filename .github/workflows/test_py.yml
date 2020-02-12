@@ -1,0 +1,29 @@
+name: Test rosidl coverage
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04]
+    steps:
+      - uses: ros-tooling/setup-ros@0.0.13
+      - uses: ros-tooling/action-ros-ci@master
+        id: action-ros
+        with:
+          package-name: rosidl_adapter
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          yml: ./codecov.yml
+          fail_ci_if_error: true
