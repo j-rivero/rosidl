@@ -23,8 +23,8 @@ jobs:
           pip3 install pytest-cov
           cd ${{ steps.action-ros.outputs.ros-workspace-directory-name }}
           colcon test --pytest-args "--cov=./ --cov-report=xml" --packages-select rosidl_adapter
-          find / -name coverage.xml
-          find / -name pytest.*.xml
+          sudo find ../ -name coverage.xml
+          sudo find ../ -name pytest.*.xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
