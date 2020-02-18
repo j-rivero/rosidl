@@ -23,12 +23,13 @@ jobs:
           pip3 install pytest-cov
           cd ${{ steps.action-ros.outputs.ros-workspace-directory-name }}
           colcon test --pytest-args "--cov=./ --cov-report=xml" --packages-select rosidl_adapter
-          find . -name pytest.*.xml
+          find / -name coverage.xml
+          find / -name pytest.*.xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./build/rosidl_adapter/test_results/rosidl_adapter/pytest.xunit.xml
+          file: /home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_adapter/test_results/rosidl_adapter/pytest.xunit.xml
           flags: unittests
           name: codecov-umbrella
           yml: ./codecov.yml
