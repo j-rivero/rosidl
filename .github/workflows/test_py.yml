@@ -17,14 +17,14 @@ jobs:
       - uses: ros-tooling/action-ros-ci@master
         id: action-ros
         with:
-          package-name: rosidl_adapter
+          package-name: rosidl_parser
       - name: Generate coverage report
         run: |
           pip3 install --upgrade colcon-bash colcon-cd colcon-cmake colcon-common-extensions colcon-core colcon-defaults colcon-lcov-result colcon-library-path colcon-metadata colcon-mixin colcon-notification==0.2.10 colcon-output colcon-package-information colcon-package-selection colcon-parallel-executor colcon-pkg-config colcon-powershell colcon-python-setup-py colcon-recursive-crawl colcon-ros==0.3.13 colcon-test-result pytest-cov
           cd ${{ steps.action-ros.outputs.ros-workspace-directory-name }}
-          colcon test --event-handlers console_cohesion+ --pytest-args '--cov=. --cov-report=xml' --packages-select rosidl_adapter
-          export PYTHONPATH=$PYTHONPATH:/home/runner/work/rosidl/rosidl/ros_ws/install/rosidl_adapter/lib/python3.6/site-packages 
-          /usr/bin/python3 -u -m pytest /home/runner/work/rosidl/rosidl/ros_ws/src/rosidl/rosidl_adapter/test -o cache_dir=/home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_adapter/ament_cmake_pytest/pytest/.cache --junit-xml=/home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_adapter/test_results/rosidl_adapter/pytest.xunit.xml --junit-prefix=rosidl_adapter --cov=. --cov-report=xml
+          colcon test --event-handlers console_cohesion+ --pytest-args '--cov=. --cov-report=xml' --packages-select rosidl_parser
+          export PYTHONPATH=$PYTHONPATH:/home/runner/work/rosidl/rosidl/ros_ws/install/rosidl_parser/lib/python3.6/site-packages 
+          /usr/bin/python3 -u -m pytest /home/runner/work/rosidl/rosidl/ros_ws/src/rosidl/rosidl_parser/test -o cache_dir=/home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_parser/ament_cmake_pytest/pytest/.cache --junit-xml=/home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_parser/test_results/rosidl_parser/pytest.xunit.xml --junit-prefix=rosidl_parser --cov=. --cov-report=xml
           echo $PWD
           find . -name coverage.xml
       - name: Upload coverage to Codecov
