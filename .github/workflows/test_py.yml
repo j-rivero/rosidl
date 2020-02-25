@@ -20,7 +20,7 @@ jobs:
           package-name: rosidl_adapter
       - name: Generate coverage report
         run: |
-          pip3 install pytest-cov
+          pip3 install --upgrade colcon-bash colcon-cd colcon-cmake colcon-common-extensions colcon-core colcon-defaults colcon-lcov-result colcon-library-path colcon-metadata colcon-mixin colcon-notification==0.2.10 colcon-output colcon-package-information colcon-package-selection colcon-parallel-executor colcon-pkg-config colcon-powershell colcon-python-setup-py colcon-recursive-crawl colcon-ros==0.3.13 colcon-test-result pytest-cov
           cd ${{ steps.action-ros.outputs.ros-workspace-directory-name }}
           colcon test --event-handlers console_cohesion+ --pytest-args '--cov=. --cov-report=xml' --packages-select rosidl_adapter
           sudo find . -name coverage.xml
