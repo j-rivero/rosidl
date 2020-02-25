@@ -25,12 +25,13 @@ jobs:
           colcon test --event-handlers console_cohesion+ --pytest-args '--cov=. --cov-report=xml' --packages-select rosidl_adapter
           export PYTHONPATH=$PYTHONPATH:/home/runner/work/rosidl/rosidl/ros_ws/install/rosidl_adapter/lib/python3.6/site-packages 
           /usr/bin/python3 -u -m pytest /home/runner/work/rosidl/rosidl/ros_ws/src/rosidl/rosidl_adapter/test -o cache_dir=/home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_adapter/ament_cmake_pytest/pytest/.cache --junit-xml=/home/runner/work/rosidl/rosidl/ros_ws/build/rosidl_adapter/test_results/rosidl_adapter/pytest.xunit.xml --junit-prefix=rosidl_adapter --cov=. --cov-report=xml
-          sudo find . -name coverage.xml -exec cat {} \;
+          echo $PWD
+          find . -name coverage.xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
+          file: /home/runner/work/rosidl/rosidl/ros_ws/coverage.xml
           flags: unittests
           name: codecov-umbrella
           yml: ./codecov.yml
